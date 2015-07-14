@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Overlay</title>
+  <link rel="stylesheet" href="./bundle.css">
+  <script src="../node_modules/regularjs/dist/regular.js"></script>
+  <script src="../dist/regular-bootstrap.js"></script>
+  <script src="./multiline.js"></script>  
+  
+</head>
+<body style='padding: 150px; text-align: center'>
+
+  
+<script>
+
+var over =  new Regular({
+  template: multiline(function(){/*
+    <a href='#' class='btn btn-lg btn-danger' ref=target on-click={show = !show } >激活</a>
+    <overlay target = {this.$refs.target} show={show} placement=left > 
+      <tooltip> tooltip内容 </tooltip>
+    </overlay>
+    <overlay target = {this.$refs.target} show={show} placement=top > 
+      <pophover title='大白兔1'> (●—●) <a class='btn-sm btn-primary' on-click={show = false} href='#'>隐藏</a></pophover>
+    </overlay>
+    <overlay target = {this.$refs.target} show={show} placement=bottom > 
+      <div class="alert alert-success" role="alert">
+      任意内容1
+      <a class='btn-sm btn-primary' on-click={show = false} href='#'>隐藏</a>
+      </div>
+    </overlay>
+    <overlay target = {this.$refs.target} show={show} placement=right> 
+      <pophover title='大白兔3' on-clickouter={show = false} > 自动隐藏</pophover>
+    </overlay>
+  */})
+})
+
+over.$inject('body')
+
+// over.$update('show', true)
+
+</script>
+</body>
+</html>

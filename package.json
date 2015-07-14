@@ -1,0 +1,39 @@
+{
+  "name": "regular-bootstrap",
+  "version": "1.0.0",
+  "description": "Rebuilting bootstrap with Regularjs.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/regular-ui/regular-bootstrap"
+  },
+  "keywords": [
+    "regularjs",
+    "component"
+  ],
+  "contributors": [
+    "amibug",
+    "leeluolee"
+  ],
+  "author": {},
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/regular-ui/regular-bootstrap/issues"
+  },
+  "homepage": "https://github.com/regular-ui/regular-bootstrap",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-shell": "^0.4.2",
+    "gulp-webpack": "^1.5.0",
+    "node-libs-browser": "^0.5.2",
+    "through2": "^2.0.0",
+    "webpack": "^1.10.1"
+  },
+  "dependencies": {
+    "regularjs": "^0.3.0"
+  }
+}
