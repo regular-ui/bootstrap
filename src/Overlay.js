@@ -1,67 +1,97 @@
-var tpl = require('./template/overlay.html');
-var R = require('regularjs');
-var dom = require('./util/dom');
-var _ = require('./util/util');
+import Regular from 'regularjs';
+
+import events from './util/events';
+import dom from './util/dom';
+import _ from './util/util';
 
 
-/**
- * Overlay Component for Regular
- * @param  data 
- *         - placement: top, left, bottom, right, auto
- *         - container: contaienr to injected, default is body
- *         - target: next to 
- *         - $body: if dont used as composite component
- * @return {[type]}     [description]
- */
-var Overlay = module.exports = R.extend({
+const tpl = `
+<div ref=overlay class='overlay fade' r-anim='on:enter; class: in,3; on:leave; class: in,4' >
+  {#inc this.$body}
+</div>
+`
+
+const Overlay =  Regular.extend({
   name: 'overlay',
   template: tpl,
-  config: function(data){
+
+  config(data){
+
     _.extend(data, {
       container: document.body,
-      placement: 'auto',
+      placement: 'top',
       gap: 10
     })
+
+    if(data.placement === 'auto'){
+      data.placement = '';
+      data.auto = true
+    }
     // if the most outside component has been inject to document
-    this.$root.$on('$inject', function(){
-      this.$watch('show', function(show){
-        if(show){
-          this.$inject(data.container, 'bottom')
-          this.placement();
-        }else{
-          this.$inject(false)
+    let destroy;
+    this.$watch('show', function(show){
+      if(show){
+        this.$inject(data.container, 'bottom')
+        if(data.autoClose){
+          setTimeout(function(){
+            destroy = events.clickouter.call(this, this.$refs.overlay, this.toggle.bind(this, false) )
+          }.bind(this), 0)
         }
-      })
-    }.bind(this))
+        this.placement();
+      }else{
+        this.$inject(false)
+        if(destroy){
+           destroy();
+           destroy = false;
+        }
+      }
+    })
   },
   // make sure component is not autemately injected 
   // during compiling stage
-  node: function(){return undefined},
-  init: function(){
-    var overlay = this.$refs.overlay;
+  node (){return undefined},
+  init (){
+    let data = this.data;
+    let overlay = this.$refs.overlay;
+
     overlay.style.position = 'absolute';
     overlay.style.top = '-9999px';
     overlay.style.left = '-9999px';
-
   },
-  toggle: function(force){
+  toggle (force){
+
     this.$update('show', force == null? !this.data.show : force)
   },
   // the position logic here
-  placement: function(){
-    var overlay = this.$refs.overlay;
-    var data = this.data;
+  placement (){
+    let overlay = this.$refs.overlay;
+    let data = this.data;
+    let placement = data.placement, position;
 
     if(!data.target) throw new Error('need target for placement')
 
-    var position = dom.position(data.target, data.container);
-    var size = dom.size(data.target);
-    var mySize = dom.size(overlay);
-    var gap = data.gap;
-    var top, left;
+    let isFixed = dom.getComputedStyle(data.target, 'position') === 'fixed';
 
+    if(!isFixed){
 
-    switch(data.placement){
+      position = dom.position(data.target, data.container);
+
+    }else{
+      
+      position = {
+        top: data.target.offsetTop,
+        left: data.target.offsetLeft
+      }
+
+    }
+    let size = dom.size(data.target);
+    let mySize = dom.size(overlay);
+    let gap = data.gap;
+    let top, left;
+
+    this.$emit('placement', placement);
+
+    switch(placement){
       case 'top':
         top = position.top -  mySize.height - gap - 10;
         left = position.left -  (mySize.width - size.width) / 2;
@@ -79,10 +109,11 @@ var Overlay = module.exports = R.extend({
         left = position.left -  (mySize.width - size.width) / 2;
         break;
     }
-
-
+    overlay.style.position = isFixed? 'fixed' : 'absolute';
     overlay.style.top = top + 'px';
     overlay.style.left = left + 'px';
   }
 })
 
+
+export default Overlay;

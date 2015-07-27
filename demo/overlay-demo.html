@@ -3,42 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <title>Overlay</title>
-  <link rel="stylesheet" href="./bundle.css">
+  <!-- <link rel="stylesheet" href="./bundle.css"> -->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="./datepicker.css">
   <script src="../node_modules/regularjs/dist/regular.js"></script>
   <script src="../dist/regular-bootstrap.js"></script>
   <script src="./multiline.js"></script>  
   
 </head>
-<body style='padding: 150px; text-align: center'>
-
+<body style='padding: 50px; border: 40px solid #ccc;'>
+<div></div>
   
 <script>
 
+
 var over =  new Regular({
   template: multiline(function(){/*
-    <a href='#' class='btn btn-lg btn-danger' ref=target on-click={show = !show } >激活</a>
-    <overlay target = {this.$refs.target} show={show} placement=left > 
-      <tooltip> tooltip内容 </tooltip>
-    </overlay>
-    <overlay target = {this.$refs.target} show={show} placement=top > 
-      <pophover title='大白兔1'> (●—●) <a class='btn-sm btn-primary' on-click={show = false} href='#'>隐藏</a></pophover>
-    </overlay>
-    <overlay target = {this.$refs.target} show={show} placement=bottom > 
-      <div class="alert alert-success" role="alert">
-      任意内容1
-      <a class='btn-sm btn-primary' on-click={show = false} href='#'>隐藏</a>
-      </div>
-    </overlay>
-    <overlay target = {this.$refs.target} show={show} placement=right> 
-      <pophover title='大白兔3' on-clickouter={show = false} > 自动隐藏</pophover>
-    </overlay>
-  */})
+    {show}
+    <input r-model={show} type='checkbox' class='ipt hello'  />
+
+<div ref=container  style='overflow:auto;width:250px; border:20px solid #aaa; height:200px; position:relative;background-color: #ddd'>
+  <div style='width: 300px; height:300px;back-ground:#ddd'></div>
+  <a href='javascript:;' style='position:absolute; top:40px; left:30px' ref=target2 class='btn btn-lg btn-danger' ref=target on-click={show = !show } >激活</a>
+</div> 
+<overlay target = {this.$refs.target2} container={this.$refs.container} show={show} placement=right> 
+  <tooltip>dhaskdjaskd<p>激活</p></tooltip>
+  <pophover title='大白兔dadada'  > 自动隐藏</pophover>
+</overlay>
+<div style='position:relative;top:200px;border: 40px solid #ccc'>
+<a href='javascript:;' ref=target class='btn btn-lg btn-danger' style='position:fixed;left:10px;top:10px' on-click={show = !show } >激活</a>
+</div>
+<overlay target = {this.$refs.target} show={show} placement=bottom > 
+
+  <div class="alert alert-success" role="alert">
+  任意内容1
+  <a class='btn-sm btn-primary' on-click={show = false} href='#'>隐藏</a>
+  </div>
+</overlay>
+
+
+<a href='javascript:;' ref=target3 class='btn btn-lg btn-danger'  on-click={show = !show } >激活</a>
+<overlay target = {this.$refs.target3} show={show} placement=left auto-close={true} > 
+  <div class="alert alert-success" role="alert">
+  任意内容2dadada
+  <a class='btn-sm btn-primary' on-click={show = false} href='#'>隐藏</a>
+  </div>
+</overlay> 
+<overlay target = {this.$refs.target3} show={show} placement=bottom > 
+  <div class="alert alert-success" role="alert">
+  任意内容2
+  <a class='btn-sm btn-primary' on-click={show = false} href='#'>隐藏</a>
+  </div>
+</overlay> 
+<input ref=input  on-focus={show2=true} on-blur={show2=false} / >
+<overlay target = {this.$refs.input} show={show2} placement=bottom  > 
+  <div class="alert alert-success" role="alert"  >
+  任意内容2
+  <a class='btn-sm btn-primary' on-click={show = false} href='#'>隐藏</a>
+  </div>
+</overlay>
+<button on-click={modalShow = true} class='btn btn-large btn-primary'>打开模态窗口</button>
+<modal close-button on-close={ this.handleClose() } show={modalShow}  >
+  <modal.head>  <!-- 自定义标题 -->
+    <span class='glyphicon glyphicon-th-list'></span> 自定义标题
+  </modal.head>
+  <modal.body> <!--  自定义内容 --> 
+    <div class="bs-callout bs-callout-danger" id="callout-glyphicons-empty-only">
+      <h4>自定义了三块组合区域</h4>
+      <p>你当然也可以通过 new Modal(...) 的方式来传入 title， body , 和 foot参数， 不过此时的context 指向Modal本身，因为没有外层组件了</p>
+    </div>
+  </modal.body>
+  <modal.foot> <!-- 自定义页脚 -->
+    <button class='btn btn-primary' on-click={modalShow = false}>关闭</button>
+  </modal.foot>
+</modal>
+ */ })
 })
 
-over.$inject('body')
+over.$inject('div')
 
-// over.$update('show', true)
-
+var d = Reboot.dom;
+var Modal = Reboot.Modal
 </script>
 </body>
 </html>
+
+

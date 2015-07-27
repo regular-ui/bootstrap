@@ -34,3 +34,5 @@ node_modules
 
 benchmark/*.txt
 test/data/*.txt
+tmp
+.DS_Store

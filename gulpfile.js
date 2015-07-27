@@ -3,6 +3,8 @@ var shell = require("gulp-shell");
 var shell = require("gulp-jshint");
 var gulp = require('gulp');
 var path = require('path');
+var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
 var webpack = require('gulp-webpack');
 
 
@@ -19,7 +21,8 @@ var wpConfig = {
   },
   module: {
     loaders: [
-       { test: /\.html$/, loader: path.join(__dirname, './scripts/webpack/rgl-loader.js')}
+       { test: /\.html$/, loader: path.join(__dirname, './scripts/webpack/rgl-loader.js')},
+       { test: /\.js$/, loader: 'babel?cacheDirectory'}
    ]
   }
 }
@@ -33,10 +36,13 @@ gulp.task('jshint', function(){
 })
 
 
-gulp.task('build', [ ], function() {
+gulp.task('build', [  ], function() {
   gulp.src("src/index.js")
     .pipe(webpack(wpConfig))
     .pipe(wrap(signatrue))
+    .pipe(gulp.dest('./dist'))
+    .pipe(wrap(mini))
+    .pipe(uglify())
     .pipe(gulp.dest('./dist'))
     .on("error", function(err){
       throw err
@@ -45,7 +51,7 @@ gulp.task('build', [ ], function() {
 
 
 gulp.task('watch', ["build"], function(){
-  gulp.watch(['src/**/*.js'], ['build']);
+  gulp.watch(['src/**/*'], ['build']);
 
 })
 

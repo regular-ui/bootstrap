@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pagination</title>
+  <link rel="stylesheet" href="./bundle.css">
+  <script src="../node_modules/regularjs/dist/regular.js"></script>
+  <script src="../dist/regular-bootstrap.js"></script>
+  <script src="./multiline.js"></script>  
+  
+</head>
+<body style='padding: 150px;  border: 40px solid #ccc;'>
+<div></div>
+
+<script>
+
+var demo =  new Regular({ 
+  template: multiline(function(){/*
+
+
+
+  <div class="btn-group-vertical" role="group" aria-label="...">
+    <dropdown-button title='点了这个按钮'  style=primary direction=up>
+      <select-item header>我是标题</select-item>
+      <select-item title='我是列表项1'>我是列表项1</select-item>
+      <select-item divider />
+      <select-item disabled>我是禁止的</select-item>
+      <select-item>我是列表项2</select-item>
+      <select-item divider />
+      <select-item>我是列表项3</select-item>
+    </dropdown-button>
+    <button class='btn btn-info'>第二个button</button>
+    <button class='btn btn-default'>第三个button</button>
+    <dropdown-button title='我们就是好朋友'  style=success direction=up>
+      <select-item header>我是标题</select-item>
+      <select-item>我是列表项1</select-item>
+      <select-item divider />
+      <select-item disabled>我是禁止的</select-item>
+      <select-item selected>我是列表项2</select-item>
+      <select-item divider />
+      <select-item>我是列表项3</select-item>
+    </dropdown-button>
+  </div>
+  <hr/>
+  <div class="btn-group" role="group" aria-label="...">
+    <dropdown-button title='点了这个按钮'  style=primary direction=up>
+      <select-item header>我是标题</select-item>
+      <select-item>我是列表项1</select-item>
+      <select-item divider />
+      <select-item disabled>我是禁止的</select-item>
+      <select-item>我是列表项2</select-item>
+      <select-item divider />
+      <select-item>我是列表项3</select-item>
+      {#list 4..31 as item }
+      <select-item title={'' + item} >我是列表项{item}</select-item>
+      {/list}
+    </dropdown-button>
+    <button class='btn btn-info'>第二个button</button>
+    <button class='btn btn-default'>第三个button</button>
+    <dropdown-button title='向上的箭头'  style=success dropup >
+      <select-item header>我是标题</select-item>
+      <select-item>我是列表项1</select-item>
+      <select-item divider />
+      <select-item disabled>我是禁止的</select-item>
+      <select-item>我是列表项2</select-item>
+      <select-item divider />
+      <select-item>我是列表项3</select-item>
+    </dropdown-button>
+  </div>
+
+
+  */}),
+  nav: function(ev){
+    console.log( ev.page)
+  }
+})
+
+demo.$inject('div')
+
+
+
+
+
+var d = Reboot.dom
+</script>
+</body>
+</html>
+

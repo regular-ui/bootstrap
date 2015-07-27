@@ -5,9 +5,8 @@ var _ =  require('regularjs').util;
 
 var dom = _.extend({}, rdom);
 
-
-// relative to body 
-dom.offset = function(elem ){
+// relative to window.
+dom.offsets = function(elem ){
 
   var win = window,
     doc = (elem.ownDocument || document), 
@@ -21,13 +20,14 @@ dom.offset = function(elem ){
     isFixed = dom.getComputedStyle(elem, 'position') === 'fixed';
 
   return {
-      top: parseInt(box.top, 10) +  (isFixed? 0: scrollTop ) -  clientTop,
-      left: parseInt(box.left, 10) + (isFixed? 0: scrollLeft ) - clientLeft
+      top: parseInt(box.top, 10) +   scrollTop -  clientTop,
+      left: parseInt(box.left, 10) +  scrollLeft  - clientLeft
   };
 }
 // relative to body
-dom.scroll = function(elem){
-  var parent, coord = {left: 0, top: 0};
+dom.scrolls = function(elem){
+  elem = elem.parentNode;
+  var coord = {left: 0, top: 0};
   while(elem && !dom.isBody(elem)){
     coord.left += elem.scrollLeft
     coord.top += elem.scrollTop
@@ -36,6 +36,9 @@ dom.scroll = function(elem){
   return coord;
 }
 
+dom.isOffsetParent = function(elem){
+  var position = dom.getComputedStyle(elem, 'position') 
+}
 dom.size = function(elem){
   if( dom.isBody(elem)){
 
@@ -52,20 +55,31 @@ dom.size = function(elem){
 }
 
 dom.position = function(elem, relative){
-  
-  var scrollElem = dom.scroll(elem);
-  var offsetElem = dom.offset(elem);
-  var position = {
-    left: offsetElem.left - scrollElem.left,
-    top: offsetElem.top - scrollElem.top
 
+  var scroll = dom.scrolls(elem);
+  var offset = dom.offsets(elem);
+  var position = {
+    left: offset.left + scroll.left,
+    top: offset.top +  scroll.top
   }
-  if(relative && !(dom.isBody(relative))){
+
+  if(relative){
     var relativePostion = dom.position(relative);
-    position.left -= relativePostion.left;
-    position.top -= relativePostion.top;
+    position.left -= relativePostion.left + parseInt(dom.getComputedStyle(relative, 'border-left-width'), 10);
+    position.top -= relativePostion.top + parseInt(dom.getComputedStyle(relative, 'border-top-width'), 10);
   }
+
+  if(dom.isBody(elem) && dom.isOffset(elem) ){
+    position.left -= parseInt(dom.getComputedStyle(elem, 'border-left-width'), 10);
+    position.top -= parseInt(dom.getComputedStyle(elem, 'border-top-width'), 10);
+  }
+
+
   return position;
+}
+
+dom.isOffset = function(elem){
+  return dom.getComputedStyle(elem, 'position') === 'static';
 }
 
 dom.getComputedStyle = function(elem, prop){
@@ -87,5 +101,22 @@ dom.getCompatDoc = function(elem){
   return doc.compatMode === 'CSS1Compat'? doc.documentElement: doc.body;
 }
 
+dom.contains = function(elem, container){
+  if(!container) container = document.body;
+
+  if(container.contains){
+    return container.contains(elem)
+  }
+
+  if(container.compareDocumentPosition){
+    return container === elem || !!(container.compareDocumentPosition(elem) & 16);
+  }
+
+  while ((elem = elem.parentNode)){
+    if (elem === container) return true;
+  }
+
+  return false;
+}
 
 module.exports = dom;

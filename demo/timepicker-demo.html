@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TimerPicker</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="./datepicker.css">
+  <script src="../node_modules/regularjs/dist/regular.js"></script>
+  <script src="../dist/regular-bootstrap.js"></script>
+  <script src="./multiline.js"></script>  
+  
+</head>
+<body style='padding: 150px; border: 40px solid #ccc;'>
+<div></div>
+
+
+
+<script>
+
+var over =  new Regular({ 
+  template: multiline(function(){/*
+  <div>
+  <button class='btn btn-primary' ref=target on-click={show = !show}>点这里</button>
+  <input type='checkbox' ref=target r-model={show}>
+  <overlay show={show} target={this.$refs.target} placement='bottom' >
+    <pophover> <timepicker></timepicker> </pophover>
+  </overlay>
+  <hr/>
+  <pagination current ={now} total=1000 ptext='<' ntext='>' on-nav={this.nav($event)} ></pagination>
+  <hr/>
+  <pagination current =1 total={now} ptext='上一页' ntext='下一页'></pagination>
+  </div>
+
+  */}),
+  nav: function(ev){
+    console.log( ev.page)
+  }
+})
+
+over.$inject('div')
+
+
+var dropdown = new Regular({
+  template: multiline(function(){/*
+    <dropdown>
+      <select-item>hdahdhadha</select-item>
+    </dropdown>
+  */})
+})
+
+
+dropdown.$inject('div')
+
+
+// over.$update('show', true)
+
+var d = Reboot.dom
+</script>
+</body>
+</html>
+
+

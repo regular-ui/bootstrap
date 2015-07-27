@@ -20,7 +20,7 @@
       <span class="input-group-addon" on-click={show=!show} >
           <span class="glyphicon glyphicon-calendar"></span>
       </span>
-  <div r-hide={!show} class="bootstrap-datetimepicker-widget dropdown-menu bottom pull-right" style="display: block; top: 34px; bottom: auto; left: auto; right: 0px;">
+  <div r-hide={!show} class="bootstrap-datetimepicker dropdown-menu bottom pull-right" style="display: block; top: 34px; bottom: auto; left: auto; right: 0px;">
   <ul class="list-unstyled">
     <li class="collapse { dateMode && 'in'}">
       <div class="datepicker">
@@ -95,49 +95,7 @@
       </table>
     </li>
     <li class="collapse {!dateMode? 'in': ''}">
-      <div class="timepicker">
-        <div class="timepicker-picker">
-          <table class="table-condensed">
-            <tbody>
-              <tr>
-                <td>
-                  <a href="#" tabindex="-1" class="btn" on-click={this.resetTime(hour + 1, minute)} >
-                    <span class="glyphicon glyphicon-chevron-up"></span>
-                  </a>
-                </td>
-                <td class="separator"></td>
-                <td>
-                  <a href="#" tabindex="-1" class="btn" on-click={this.resetTime(hour, minute + 1)} >
-                    <span class="glyphicon glyphicon-chevron-up"></span>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input class="timepicker-hour" value={hour|norm}>
-                </td>
-                <td class="separator">:</td>
-                <td>
-                  <input class="timepicker-minute" value={minute|norm}>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="#" tabindex="-1" class="btn" on-click={this.resetTime(hour -1, minute)} >
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                  </a>
-                </td>
-                <td class="separator"></td>
-                <td>
-                  <a href="#" tabindex="-1" class="btn" >
-                    <span class="glyphicon glyphicon-chevron-down" on-click = {this.resetTime(hour, minute - 1)} ></span>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+
     </li>
   </ul>
 </div>
