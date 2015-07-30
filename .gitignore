@@ -36,3 +36,6 @@ benchmark/*.txt
 test/data/*.txt
 tmp
 .DS_Store
+doc/public
+demo/
+.publish

@@ -6,7 +6,7 @@ import _ from './util/util';
 
 
 const tpl = `
-<div ref=overlay class='overlay fade' r-anim='on:enter; class: in,3; on:leave; class: in,4' >
+<div ref=overlay class='overlay fade {className}' r-anim='on:enter; class: in,3; on:leave; class: in,4' >
   {#inc this.$body}
 </div>
 `
@@ -22,6 +22,7 @@ const Overlay =  Regular.extend({
       placement: 'top',
       gap: 10
     })
+    data.gap = parseInt(data.gap, 10)
 
     if(data.placement === 'auto'){
       data.placement = '';
@@ -49,7 +50,7 @@ const Overlay =  Regular.extend({
   },
   // make sure component is not autemately injected 
   // during compiling stage
-  node (){return undefined},
+  node (){},
   init (){
     let data = this.data;
     let overlay = this.$refs.overlay;
@@ -93,7 +94,7 @@ const Overlay =  Regular.extend({
 
     switch(placement){
       case 'top':
-        top = position.top -  mySize.height - gap - 10;
+        top = position.top -  mySize.height - gap;
         left = position.left -  (mySize.width - size.width) / 2;
         break;
       case 'left':

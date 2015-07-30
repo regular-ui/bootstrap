@@ -1,7 +1,7 @@
 /**
 @author	undefined
 @version	1.0.0
-@homepage	https://github.com/regular-ui/regular-bootstrap
+@homepage	https://github.com/regular-ui/bootstrap
 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -12,7 +12,7 @@
 		exports["Reboot"] = factory(require("Regular"));
 	else
 		root["Reboot"] = factory(root["Regular"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_3__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -67,31 +67,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _DropDownButton = __webpack_require__(1);
+	var _DropDownButton = __webpack_require__(7);
 
 	var _DropDownButton2 = _interopRequireDefault(_DropDownButton);
 
-	var _Pagination = __webpack_require__(6);
+	var _Pagination = __webpack_require__(10);
 
 	var _Pagination2 = _interopRequireDefault(_Pagination);
 
-	var _SelectAble = __webpack_require__(2);
+	var _SelectAble = __webpack_require__(8);
 
 	var _SelectAble2 = _interopRequireDefault(_SelectAble);
 
-	var _SelectItem = __webpack_require__(7);
+	var _SelectItem = __webpack_require__(11);
 
 	var _SelectItem2 = _interopRequireDefault(_SelectItem);
 
-	var _Pophover = __webpack_require__(8);
+	var _Pophover = __webpack_require__(12);
 
 	var _Pophover2 = _interopRequireDefault(_Pophover);
 
-	var _Overlay = __webpack_require__(10);
+	var _Overlay = __webpack_require__(3);
 
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 
-	var _Tooltip = __webpack_require__(9);
+	var _Tooltip = __webpack_require__(1);
 
 	var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
@@ -103,11 +103,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _Mask2 = _interopRequireDefault(_Mask);
 
-	var _utilUtil = __webpack_require__(4);
+	var _Tab = __webpack_require__(15);
+
+	var _Tab2 = _interopRequireDefault(_Tab);
+
+	var _utilUtil = __webpack_require__(6);
 
 	var _utilUtil2 = _interopRequireDefault(_utilUtil);
 
-	var _utilDom = __webpack_require__(12);
+	var _utilDom = __webpack_require__(5);
 
 	var _utilDom2 = _interopRequireDefault(_utilDom);
 
@@ -122,6 +126,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Tooltip: _Tooltip2['default'],
 	  Modal: _Modal2['default'],
 	  Mask: _Mask2['default'],
+	  Tab: _Tab2['default'],
 
 	  // utility
 	  util: _utilUtil2['default'],
@@ -141,294 +146,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _SelectAble = __webpack_require__(2);
-
-	var _SelectAble2 = _interopRequireDefault(_SelectAble);
-
-	__webpack_require__(5);
-
-	var tpl = '\n  <mask show={show} layer=dropdown on-click={show=false}></mask>\n  <div class="btn-group" r-class={ {\'dropup\': dropup, \'open\': show} } role="group">\n    <button type="button" \n      class="btn btn-{style || \'default\'} dropdown-toggle" \n      data-toggle="dropdown" aria-haspopup="true" aria-expanded={!!show}\n      on-click={show=!show} >\n      {#inc selected.data.title || title }\n      <span class="caret"></span>\n    </button >\n    <ul class="dropdown-menu">\n      {#list items as item}\n        {#inc item}\n      {/list}\n    </ul>\n  </div>\n';
-
-	exports['default'] = _SelectAble2['default'].extend({
-	  name: "dropdown-button",
-	  template: tpl
-	});
-	module.exports = exports['default'];
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _regularjs = __webpack_require__(3);
+	var _regularjs = __webpack_require__(2);
 
 	var _regularjs2 = _interopRequireDefault(_regularjs);
 
-	var _utilUtil = __webpack_require__(4);
-
-	var _utilUtil2 = _interopRequireDefault(_utilUtil);
-
-	var SelectAble = _regularjs2['default'].extend({
-
-	  config: function config(data) {
-	    _utilUtil2['default'].extend(data, {
-	      items: []
-	    });
-	  },
-
-	  pick: function pick(item) {
-	    var data = this.data;
-	    if (item.data.disabled) return;
-
-	    data.selected = item;
-	    data.show = false;
-
-	    this.$update();
-	    this.$emit('pick', item);
-	  }
-	});
-
-	exports['default'] = SelectAble;
-	module.exports = exports['default'];
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var util = __webpack_require__(3).util;
-
-	module.exports = util.extend({}, util);
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Regular = __webpack_require__(3);
-	var dom = Regular.dom;
-
-	Regular.event('clickouter', (function () {
-	  // handles for hold global register
-	  var callbacks = [];
-	  var onClickOuter = function onClickOuter(event) {
-	    if (callbacks.length) {
-	      callbacks.forEach(function (cb) {
-	        if (typeof cb === 'function') cb(event);
-	      });
-	    }
-	  };
-	  var getExceptMe = function getExceptMe(elem) {
-	    return function (target) {
-	      while (target && !dom.isBody(target)) {
-	        if (target === elem) return true;
-	        target = target.parentNode;
-	      }
-	      return false;
-	    };
-	  };
-	  return function clickouter(elem, fire) {
-	    var except = getExceptMe(elem);
-	    var preLen = callbacks.length;
-	    function onClickOuterSelf(event) {
-	      if (except(event.target)) fire(event);
-	    }
-
-	    callbacks.push(onClickOuter);
-
-	    if (!preLen) {
-	      dom.on(document, 'click', onClickOuter);
-	    }
-
-	    return function destroy() {
-	      var index = callbacks.indexOf(onClickOuterSelf);
-	      if (~index) callbacks.splice(index, 1);
-	      if (!callbacks.length) {
-	        dom.off(document, 'click', onClickOuter);
-	      }
-	    };
-	  };
-	})());
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _regularjs = __webpack_require__(3);
-
-	var _regularjs2 = _interopRequireDefault(_regularjs);
-
-	var tpl = '\n<ul class="pagination" r-hide={!total||total===0}>\n  <li on-click={ this.nav(current-1)} class=\'pageprv {current==1? "disabled": ""}\'>\n    <a  href=\'#\' >{ @(ptext || \'PREV\' )}</a>\n  </li>\n  {#if total - 5 > show * 2}\n  <li  on-click={ this.nav(1)} class={current==1? \'active\': \'\'}><a href="#">1</a></li>\n  {#if begin > 2}<li><a>...</a></li>{/if}\n  {#list begin..end as i}\n    <li on-click={ this.nav(i)} class={current==i? \'active\': \'\'}><a href="#">{i}</a></li>\n  {/list}\n  {#if (end < total-1)}\n    <li><a>...</a></li>\n  {/if}\n  <li r-hide={end <= total-1}><a>...</a></li>\n  <li on-click={ this.nav(total) } class={ current==total? \'active\': \'\'}> <a href="#">{total}</a></li>\n  {#else}\n    {#list 1..total as i}\n    <li on-click={ this.nav(i)} class={current==i? \'active\': \'\'}><a href="#">{i}</a></li>\n    {/list}\n  {/if}\n  <li on-click={ this.nav(current + 1)} class=\'pagenxt {current==total? "disabled": ""}\'><a  href=\'#\' >{ @(ntext || \'NEXT\') }</a></li>\n</ul>\n';
-
-	exports['default'] = _regularjs2['default'].extend({
-
-	  name: "pagination",
-
-	  template: tpl,
-
-	  config: function config(data) {
-
-	    var count = 5;
-	    var show = data.show = Math.floor(count / 2);
-	    data.current = parseInt(data.current || 1, 10);
-	    data.total = parseInt(data.total || 1, 10);
-
-	    this.$watch(['current', 'total'], function (current, total) {
-	      if (current > total) return this.nav(total);
-
-	      data.begin = current - show;
-	      data.end = current + show;
-
-	      if (data.begin < 2) data.begin = 2;
-	      if (data.end > data.total - 1) data.end = data.total - 1;
-	      if (current - data.begin <= 1) data.end = data.end + show + data.begin - current;
-	      if (data.end - current <= 1) data.begin = data.begin - show - current + data.end;
-	    });
-	  },
-
-	  nav: function nav(page) {
-	    var data = this.data;
-	    if (page < 1 || page > data.total || page === data.current) return false;
-	    var evObj = { page: page };
-	    this.$emit('nav', evObj);
-
-	    if (!evObj.stop) {
-	      data.current = page;
-	    }
-
-	    return false;
-	  }
-	});
-	module.exports = exports['default'];
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _regularjs = __webpack_require__(3);
-
-	var _regularjs2 = _interopRequireDefault(_regularjs);
-
-	var _utilUtil = __webpack_require__(4);
-
-	var _utilUtil2 = _interopRequireDefault(_utilUtil);
-
-	var tpl = '\n<li r-class=\'"dropdown-header": header, "divider": divider, "disabled": disabled\'>\n  {#if !divider}\n    {#if !header }\n      <a href="javascript:;" on-click={ this.$outer.pick(this)} >{#inc this.$body}</a>\n    {#else}\n      {#inc this.$body}\n    {/if}\n  {/if}\n</li>\n';
-
-	var SelectItem = _regularjs2['default'].extend({
-
-	  name: 'select-item',
-	  template: tpl,
-
-	  config: function config(data) {
-	    this.$outer.data.items.push(this);
-	    if (data.selected) this.$outer.data.selected = this;
-	  }
-
-	});
-
-	exports['default'] = SelectItem;
-	module.exports = exports['default'];
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _Tooltip = __webpack_require__(9);
-
-	var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
-	var tpl = '\n<div role=\'tooltip\' class=\'popover {placement} fade in show\' style=\'position:relative\'>\n  <div class=\'arrow\'></div>\n  {#if title}<h3 class=\'popover-title\' r-hide={!title}>{title}</h3>{/if}\n  <div class=\'popover-content\' >{#inc this.$body}</div>\n</div>\n';
-
-	// simplily replacing tooltip's  template, then we got Pophover
-	exports['default'] = _Tooltip2['default'].extend({
-	  name: 'pophover',
-	  template: tpl
-	});
-	module.exports = exports['default'];
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _regularjs = __webpack_require__(3);
-
-	var _regularjs2 = _interopRequireDefault(_regularjs);
-
-	var _Overlay = __webpack_require__(10);
+	var _Overlay = __webpack_require__(3);
 
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 
-	var _utilUtil = __webpack_require__(4);
+	var _utilUtil = __webpack_require__(6);
 
 	var _utilUtil2 = _interopRequireDefault(_utilUtil);
 
-	var tpl = '\n<div role=\'tooltip\' class=\'tooltip {placement} fade in\' style=\'position:relative\'>\n  <div class=\'tooltip-arrow\'></div>\n  <div class=\'tooltip-inner\'>{#inc this.$body}</div>\n</div>\n';
+	var tpl = '\n<div role=\'tooltip\' class=\'tooltip {placement}\' style=\'position:relative\'>\n  <div class=\'tooltip-arrow\'></div>\n  <div class=\'tooltip-inner\'>{#inc this.$body}</div>\n</div>\n';
 
 	// tooltip can be composited with Overlay for alignment
 	// <overlay> <tooltip>your content</tooltip> </overlay>
 	exports['default'] = _regularjs2['default'].extend({
 	  name: 'tooltip',
 	  template: tpl,
-
 	  config: function config(data) {
 	    var $outer = this.$outer;
 	    if ($outer instanceof _Overlay2['default']) {
-	      data.placement = $outer.data.placement || 'top';
+	      data.placement = $outer.data.placement;
 	    }
+	    data.placement = data.placement || 'top';
 	  }
 	});
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
+/* 2 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -439,23 +193,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _regularjs = __webpack_require__(3);
+	var _regularjs = __webpack_require__(2);
 
 	var _regularjs2 = _interopRequireDefault(_regularjs);
 
-	var _utilEvents = __webpack_require__(11);
+	var _utilEvents = __webpack_require__(4);
 
 	var _utilEvents2 = _interopRequireDefault(_utilEvents);
 
-	var _utilDom = __webpack_require__(12);
+	var _utilDom = __webpack_require__(5);
 
 	var _utilDom2 = _interopRequireDefault(_utilDom);
 
-	var _utilUtil = __webpack_require__(4);
+	var _utilUtil = __webpack_require__(6);
 
 	var _utilUtil2 = _interopRequireDefault(_utilUtil);
 
-	var tpl = '\n<div ref=overlay class=\'overlay fade\' r-anim=\'on:enter; class: in,3; on:leave; class: in,4\' >\n  {#inc this.$body}\n</div>\n';
+	var tpl = '\n<div ref=overlay class=\'overlay fade {className}\' r-anim=\'on:enter; class: in,3; on:leave; class: in,4\' >\n  {#inc this.$body}\n</div>\n';
 
 	var Overlay = _regularjs2['default'].extend({
 	  name: 'overlay',
@@ -468,6 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      placement: 'top',
 	      gap: 10
 	    });
+	    data.gap = parseInt(data.gap, 10);
 
 	    if (data.placement === 'auto') {
 	      data.placement = '';
@@ -495,9 +250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  // make sure component is not autemately injected
 	  // during compiling stage
-	  node: function node() {
-	    return undefined;
-	  },
+	  node: function node() {},
 	  init: function init() {
 	    var data = this.data;
 	    var overlay = this.$refs.overlay;
@@ -541,7 +294,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    switch (placement) {
 	      case 'top':
-	        top = position.top - mySize.height - gap - 10;
+	        top = position.top - mySize.height - gap;
 	        left = position.left - (mySize.width - size.width) / 2;
 	        break;
 	      case 'left':
@@ -567,13 +320,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 11 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Regular = __webpack_require__(3);
-	var dom = __webpack_require__(12);
+	var Regular = __webpack_require__(2);
+	var dom = __webpack_require__(5);
 
 	/**
 	 * Custom event
@@ -631,13 +384,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = events;
 
 /***/ },
-/* 12 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var rdom = __webpack_require__(3).dom;
-	var _ = __webpack_require__(3).util;
+	var rdom = __webpack_require__(2).dom;
+	var _ = __webpack_require__(2).util;
 
 	var dom = _.extend({}, rdom);
 
@@ -755,6 +508,257 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = dom;
 
 /***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var util = __webpack_require__(2).util;
+
+	module.exports = util.extend({}, util);
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _SelectAble = __webpack_require__(8);
+
+	var _SelectAble2 = _interopRequireDefault(_SelectAble);
+
+	__webpack_require__(9);
+
+	var tpl = '\n  <mask show={ show } layer=dropdown on-click={ show = false }></mask>\n  <div class="btn-group {className}" r-class={ {\'dropup\': dropup, \'open\': show} } role="group">\n    <button type="button" \n      class="btn btn-{style || \'default\'} dropdown-toggle" \n      aria-haspopup="true" aria-expanded={!!show}\n      on-click={ show=!show } >\n      {#inc selected? selected.$body : title }\n      {#if @(!split)}\n      <span class="caret"></span>\n      {/if}\n    </button>\n    {#if @(split)}\n    <button \n      on-click={show =!show}\n      type="button" \n      class="btn btn-{style || \'default\'} dropdown-toggle" \n      aria-haspopup="true" aria-expanded={!!show}>\n      <span class="caret"></span>\n      <span class="sr-only">Toggle Dropdown</span>\n    </button>\n    {/if}\n    <ul class="dropdown-menu">\n      {#inc this.$body}\n    </ul>\n  </div>\n';
+
+	exports['default'] = _SelectAble2['default'].extend({
+	  name: "dropdown-button",
+	  template: tpl
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _regularjs = __webpack_require__(2);
+
+	var _regularjs2 = _interopRequireDefault(_regularjs);
+
+	var _utilUtil = __webpack_require__(6);
+
+	var _utilUtil2 = _interopRequireDefault(_utilUtil);
+
+	var SelectAble = _regularjs2['default'].extend({
+
+	  config: function config(data) {
+	    _utilUtil2['default'].extend(data, {
+	      items: []
+	    });
+	  },
+
+	  pick: function pick(item) {
+	    var data = this.data;
+	    if (item.data.disabled) return;
+
+	    data.selected = item;
+	    data.show = false;
+
+	    this.$update();
+	    this.$emit('pick', item);
+	  }
+	});
+
+	exports['default'] = SelectAble;
+	module.exports = exports['default'];
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Regular = __webpack_require__(2);
+	var dom = Regular.dom;
+
+	Regular.event('clickouter', (function () {
+	  // handles for hold global register
+	  var callbacks = [];
+	  var onClickOuter = function onClickOuter(event) {
+	    if (callbacks.length) {
+	      callbacks.forEach(function (cb) {
+	        if (typeof cb === 'function') cb(event);
+	      });
+	    }
+	  };
+	  var getExceptMe = function getExceptMe(elem) {
+	    return function (target) {
+	      while (target && !dom.isBody(target)) {
+	        if (target === elem) return true;
+	        target = target.parentNode;
+	      }
+	      return false;
+	    };
+	  };
+	  return function clickouter(elem, fire) {
+	    var except = getExceptMe(elem);
+	    var preLen = callbacks.length;
+	    function onClickOuterSelf(event) {
+	      if (except(event.target)) fire(event);
+	    }
+
+	    callbacks.push(onClickOuter);
+
+	    if (!preLen) {
+	      dom.on(document, 'click', onClickOuter);
+	    }
+
+	    return function destroy() {
+	      var index = callbacks.indexOf(onClickOuterSelf);
+	      if (~index) callbacks.splice(index, 1);
+	      if (!callbacks.length) {
+	        dom.off(document, 'click', onClickOuter);
+	      }
+	    };
+	  };
+	})());
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _regularjs = __webpack_require__(2);
+
+	var _regularjs2 = _interopRequireDefault(_regularjs);
+
+	var tpl = '\n<ul class="pagination" r-hide={!total||total===0}>\n  <li on-click={ this.nav(current-1)} class=\'pageprv {current==1? "disabled": ""}\'>\n    <a  href=\'#\' >{ @(ptext || \'PREV\' )}</a>\n  </li>\n  {#if total - 5 > show * 2}\n  <li  on-click={ this.nav(1)} class={current==1? \'active\': \'\'}><a href="#">1</a></li>\n  {#if begin > 2}<li><a>...</a></li>{/if}\n  {#list begin..end as i}\n    <li on-click={ this.nav(i)} class={current==i? \'active\': \'\'}><a href="#">{i}</a></li>\n  {/list}\n  {#if (end < total-1)}\n    <li><a>...</a></li>\n  {/if}\n  <li r-hide={end <= total-1}><a>...</a></li>\n  <li on-click={ this.nav(total) } class={ current==total? \'active\': \'\'}> <a href="#">{total}</a></li>\n  {#else}\n    {#list 1..total as i}\n    <li on-click={ this.nav(i)} class={current==i? \'active\': \'\'}><a href="#">{i}</a></li>\n    {/list}\n  {/if}\n  <li on-click={ this.nav(current + 1)} class=\'pagenxt {current==total? "disabled": ""}\'><a  href=\'#\' >{ @(ntext || \'NEXT\') }</a></li>\n</ul>\n';
+
+	exports['default'] = _regularjs2['default'].extend({
+
+	  name: "pagination",
+
+	  template: tpl,
+
+	  config: function config(data) {
+
+	    var count = 5;
+	    var show = data.show = Math.floor(count / 2);
+	    data.current = parseInt(data.current || 1, 10);
+	    data.total = parseInt(data.total || 1, 10);
+
+	    this.$watch(['current', 'total'], function (current, total) {
+	      if (current > total) return this.nav(total);
+
+	      data.begin = current - show;
+	      data.end = current + show;
+
+	      if (data.begin < 2) data.begin = 2;
+	      if (data.end > data.total - 1) data.end = data.total - 1;
+	      if (current - data.begin <= 1) data.end = data.end + show + data.begin - current;
+	      if (data.end - current <= 1) data.begin = data.begin - show - current + data.end;
+	    });
+	  },
+
+	  nav: function nav(page) {
+	    var data = this.data;
+	    if (page < 1 || page > data.total || page === data.current) return false;
+	    var evObj = { page: page };
+	    this.$emit('nav', evObj);
+
+	    if (!evObj.stop) {
+	      data.current = page;
+	    }
+
+	    return false;
+	  }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _regularjs = __webpack_require__(2);
+
+	var _regularjs2 = _interopRequireDefault(_regularjs);
+
+	var _utilUtil = __webpack_require__(6);
+
+	var _utilUtil2 = _interopRequireDefault(_utilUtil);
+
+	var tpl = '\n<li r-class=\'"dropdown-header": header, "divider": divider, "disabled": disabled\'>\n  {#if !divider}\n    {#if !header }\n      <a href="javascript:;" on-click={ this.$outer.pick(this)} >{#inc this.$body}</a>\n    {#else}\n      {#inc this.$body}\n    {/if}\n  {/if}\n</li>\n';
+
+	var SelectItem = _regularjs2['default'].extend({
+
+	  name: 'select-item',
+	  template: tpl,
+
+	  config: function config(data) {
+	    this.$outer.data.items.push(this);
+	    if (data.selected) this.$outer.data.selected = this;
+	  }
+
+	});
+
+	exports['default'] = SelectItem;
+	module.exports = exports['default'];
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _Tooltip = __webpack_require__(1);
+
+	var _Tooltip2 = _interopRequireDefault(_Tooltip);
+
+	var tpl = '\n<div role=\'tooltip\' class=\'popover {placement} show\' style=\'position:relative\'>\n  <div class=\'arrow\'></div>\n  {#if title}<h3 class=\'popover-title\'>{title}</h3>{/if}\n  <div class=\'popover-content\' >{#inc this.$body}</div>\n</div>\n';
+
+	// simplily replacing tooltip's  template, then we got Pophover
+	exports['default'] = _Tooltip2['default'].extend({
+	  name: 'pophover',
+	  template: tpl
+	});
+	module.exports = exports['default'];
+
+/***/ },
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -766,11 +770,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _regularjs = __webpack_require__(3);
+	var _regularjs = __webpack_require__(2);
 
 	var _regularjs2 = _interopRequireDefault(_regularjs);
 
-	var _utilUtil = __webpack_require__(4);
+	var _utilUtil = __webpack_require__(6);
 
 	var _utilUtil2 = _interopRequireDefault(_utilUtil);
 
@@ -778,29 +782,41 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _Mask2 = _interopRequireDefault(_Mask);
 
-	var tpl = '\n<mask show={show} on-click={show=false}></mask>\n<div class="modal fade show" r-anim=\'on:enter;class: in, 3; on: leave; class: in, 4\' tabindex="-1" role="dialog">\n  <div class="modal-dialog">\n    <div class="modal-content" role="document">\n      <div class="modal-header">\n        {#if closeButton}\n        <button class="close" aria-label="Close" on-click={show = false}>\n          <span aria-hidden="true">×</span>\n        </button>\n        {/if}\n        <h4 class="modal-title">{#inc head || \'Modal\'}</h4>\n      </div>\n      <div class="modal-body">\n        {#inc  body || this.$body }\n      </div>\n      <div class="modal-footer">\n        {#if foot} \n          {#inc foot } \n        {#else}\n          <button type="button" class="btn btn-default" on-click={ this.confirm(true) }>Confirm</button>\n          <button type="button" class="btn btn-default" on-click={ this.confirm(false) }>Cancel</button>\n        {/if}\n      </div>\n    </div>\n  </div>\n</div>\n';
+	var tpl = '\n<mask show={show} on-click={show=false}></mask>\n<div class="modal fade show in" r-anim=\'on:enter;class: in, 3; on: leave; class: in, 4\' tabindex="-1" role="dialog">\n  <div class="modal-dialog">\n    <div class="modal-content" role="document">\n      <div class="modal-header">\n        {#if closeButton}\n        <button class="close" aria-label="Close" on-click={show = false}>\n          <span aria-hidden="true">×</span>\n        </button>\n        {/if}\n        <h4 class="modal-title">{#inc head || \'Modal\'}</h4>\n      </div>\n      <div class="modal-body">\n        {#inc  body || this.$body }\n      </div>\n      <div class="modal-footer">\n        {#if foot} \n          {#inc foot } \n        {#else}\n          <button type="button" class="btn btn-default" on-click={ this.confirm(true) }>Confirm</button>\n          <button type="button" class="btn btn-default" on-click={ this.confirm(false) }>Cancel</button>\n        {/if}\n      </div>\n    </div>\n  </div>\n</div>\n';
 
+	/**
+	 * [description]
+	 * @param  {Boolean} show     whether inject modal to target
+	 * @param  {Node}    target   [Optinal] where to place modal, default is document.body
+	 *
+	 * @event   confirm  
+	 *          @param {Boolean} accept 
+	 *
+	 * @return  {Modal}
+	 */
 	var Modal = _regularjs2['default'].extend({
 	  name: "modal",
 	  template: tpl,
 
 	  node: function node() {},
 
-	  config: function config(data) {
-	    this.$watch('show', function (show, oshow) {
-	      var bShow = !!show,
-	          bOshow = !!oshow,
-	          body = data.target || document.body;
-	      if (bShow && !bOshow) {
-	        this.$inject(body);
-	      } else if (!bShow && bOshow) {
-	        this.$inject(false);
-	      }
-	    });
+	  config: function config(data) {},
+
+	  init: function init() {
+	    var data = this.data;
+	    this.$watch('!!show', function (show, oshow) {
+	      var body = data.container || document.body;
+	      this.$inject(show ? body : false);
+	    }, { init: true });
 	  },
 	  confirm: function confirm(accept) {
-	    this.$update('show', false);
-	    this.$emit('close', accept);
+	    // this.$update can be used like `scope.apply` in angularjs
+	    this.$update(function (data) {
+	      this.$emit('confirm', accept);
+	      if (data.autoClose) {
+	        data.show = false;
+	      }
+	    });
 	  }
 	});
 
@@ -863,53 +879,100 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _regularjs = __webpack_require__(3);
+	var _regularjs = __webpack_require__(2);
+
+	// template
 
 	var _regularjs2 = _interopRequireDefault(_regularjs);
 
-	var _utilUtil = __webpack_require__(4);
-
-	var _utilUtil2 = _interopRequireDefault(_utilUtil);
-
-	__webpack_require__(5);
-
-	// template
-	var tpl = '\n  <div class="{layer}-backdrop fade" \n    r-animation=\'on:enter;class: in,3; on:leave; class: in, 4\' \n    on-click=\'click\' >{#inc this.$body}</div>\n';
+	var tpl = '\n  <div class="{layer}-backdrop {klass} fade in" \n    r-animation=\'on:enter;class: in,3; on:leave; class: in, 4\' \n    r-style="\'background-color\': bgColor"\n    on-click=\'click\' >\n    {#inc this.$body}\n  </div>\n';
+	// ---
+	//
 
 	var Mask = _regularjs2['default'].extend({
 
 	  name: "mask",
 	  template: tpl,
 
-	  node: function node() {
-	    return false;
-	  },
+	  node: function node() {},
 
 	  config: function config(data) {
 	    data.layer = data.layer || 'modal';
-	    this.$watch('show', function (show, oshow) {
-	      var bShow = !!show;
-	      var bOshow = !!oshow;
-	      var body = document.body;
+	  },
+	  // after compile
+	  init: function init() {
+	    var data = this.data;
+	    this.$watch('!!show', function (show, oshow) {
+	      var body = data.container || document.body;
+	      this.$inject(show ? body : false);
+	    }, { init: true });
 
-	      if (bShow && !bOshow) {
-
-	        this.$inject(body);
-	      } else if (!bShow && bOshow) {
-	        this.$inject(false);
+	    this.$on('click', function () {
+	      if (data.autoClose) {
+	        this.$update('show', false);
 	      }
 	    });
+	  },
+	  toggle: function toggle(force) {
+	    var show = this.data.show;
+	    this.$update('show', force != undefined ? force : !show);
 	  }
 	});
 
 	var mask = Mask.mask = new Mask();
-
-	Mask.toggle = function (force) {
-	  var show = mask.data.show;
-	  mask.$update('show', force != undefined ? force : !show);
+	Mask.show = function (options) {
+	  if (options === true) options = { autoClose: true };
+	  mask.$update({
+	    bgColor: options.bgColor,
+	    autoClose: options.autoClose !== false,
+	    show: true
+	  }, true);
+	  return mask;
 	};
 
 	exports['default'] = Mask;
+	module.exports = exports['default'];
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _regularjs = __webpack_require__(2);
+
+	var _regularjs2 = _interopRequireDefault(_regularjs);
+
+	var _ = _regularjs2['default'].util;
+
+	var tpl = '\n  <ul class="nav nav-tabs">\n     {#inc this.$body}\n  </ul>\n  <div class=\'tab-content\' r-anim=\'on:switch;class:fade in\'>\n    {#inc selected.$body}\n  </div>\n';
+
+	var Tab = _regularjs2['default'].extend({
+	  name: 'tab',
+	  template: tpl
+	});
+
+	var paneTpl = '\n  <li role="presentation" class={this.$outer.data.selected==this? \'active\':\'\'} on-click={this.pick()}>\n    <a href={href || \'javascript:;\'}>{#inc title}</a>\n  </li>\n';
+
+	Tab.Pane = _regularjs2['default'].extend({
+	  name: 'tab.pane',
+	  template: paneTpl,
+	  config: function config(data) {
+	    if (data.selected) this.pick();
+	  },
+	  pick: function pick() {
+	    if (!this.$outer) return;
+	    this.$outer.$update('selected', this);
+	  }
+	});
+
+	exports['default'] = Tab;
 	module.exports = exports['default'];
 
 /***/ }

@@ -1,45 +1,59 @@
 
 import Regular from 'regularjs';
-import _ from './util/util';
-import './util/directive';
 
 // template
 const tpl = `
-  <div class="{layer}-backdrop fade" 
+  <div class="{layer}-backdrop {klass} fade in" 
     r-animation='on:enter;class: in,3; on:leave; class: in, 4' 
-    on-click='click' >{#inc this.$body}</div>
+    r-style="'background-color': bgColor"
+    on-click='click' >
+    {#inc this.$body}
+  </div>
 `
+// ---
+// 
+
 
 const Mask =  Regular.extend({
   
   name: "mask",
   template: tpl,
 
-  node(){return false},
+  node(){},
 
   config( data ){
-    data.layer = data.layer || 'modal'
-    this.$watch('show', function(show, oshow){
-      let bShow = !!show;
-      let bOshow = !!oshow;
-      let body = document.body;
+    data.layer = data.layer || 'modal';
+  },
+  // after compile
+  init(){
+    let data = this.data;
+    this.$watch('!!show', function(show, oshow){
+      let body = data.container || document.body
+      this.$inject(show? body: false)
+    }, {init: true})
 
-      if(bShow && !bOshow){
-
-        this.$inject(body)
-
-      }else if(!bShow && bOshow){
-        this.$inject( false )
+    this.$on('click', function(){
+      if(data.autoClose){
+        this.$update('show', false)
       }
     })
+  },
+  toggle(force){
+    let show = this.data.show;
+    this.$update('show', force != undefined? force: !show)
   }
 })
 
-const mask = Mask.mask = new Mask();
 
-Mask.toggle = function(force){
-  let show = mask.data.show;
-  mask.$update('show', force != undefined? force: !show)
+let mask = Mask.mask = new Mask();
+Mask.show = function(options){
+  if(options === true) options = {autoClose: true}
+  mask.$update( {
+    bgColor: options.bgColor,
+    autoClose: options.autoClose !== false,
+    show: true
+  }, true)
+  return mask;
 }
 
 export default Mask;

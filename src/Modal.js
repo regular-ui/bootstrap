@@ -4,7 +4,7 @@ import Mask from './Mask';
 
 const tpl = `
 <mask show={show} on-click={show=false}></mask>
-<div class="modal fade show" r-anim='on:enter;class: in, 3; on: leave; class: in, 4' tabindex="-1" role="dialog">
+<div class="modal fade show in" r-anim='on:enter;class: in, 3; on: leave; class: in, 4' tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content" role="document">
       <div class="modal-header">
@@ -31,26 +31,40 @@ const tpl = `
 </div>
 `
 
+
+/**
+ * [description]
+ * @param  {Boolean} show     whether inject modal to target
+ * @param  {Node}    target   [Optinal] where to place modal, default is document.body
+ *
+ * @event   confirm  
+ *          @param {Boolean} accept 
+ *
+ * @return  {Modal}
+ */
 const Modal  = Regular.extend({
   name: "modal",
   template: tpl,
 
   node(){},
 
-  config (data){
-    this.$watch('show', function(show, oshow){
-      let bShow = !!show, bOshow = !!oshow,  
-        body = data.target || document.body;
-      if(bShow && !bOshow){
-        this.$inject( body )
-      }else if(!bShow && bOshow){
-        this.$inject( false )
-      }
-    })
+  config (data){ },
+
+  init(){
+    let data = this.data;
+    this.$watch('!!show', function(show, oshow){
+      let body = data.container || document.body
+      this.$inject(show? body: false)
+    }, {init: true})
   },
   confirm (accept){
-    this.$update('show', false)
-    this.$emit('close', accept);
+    // this.$update can be used like `scope.apply` in angularjs
+    this.$update(function(data){
+      this.$emit('confirm', accept);
+      if(data.autoClose){
+        data.show = false;
+      }
+    })
   }
 });
 
@@ -65,6 +79,7 @@ const Modal  = Regular.extend({
     }
   })
 })
+
 
 const statics = {
   alert: {

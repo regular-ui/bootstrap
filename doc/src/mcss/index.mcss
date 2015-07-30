@@ -1,0 +1,63 @@
+@import 'codemirror/lib/codemirror.css';
+@import 'codemirror/theme/solarized.css';
+@import 'highlight.js/styles/solarized_light.css';
+@import 'mass/mass/index.mcss';
+
+
+.cm-s-solarized.CodeMirror{
+  $box-shadow: none;
+}
+
+.playground{
+  position: relative;
+  .highlight {
+    display: none;
+    padding: 0;
+  }
+  &-open{
+    .highlight{
+      display: block;
+    }
+  }
+  .toggle{
+    text-align: center;
+    line-height: 38px;
+    text-indent: 1px;
+    font-size: 22px;
+    display: block;
+    margin-top: -10px;
+    color: #999;
+    cursor: pointer;
+    &:hover{
+      color: #5bc0de;
+    }
+  }
+}
+
+.CodeMirror-scroll{
+  padding: 10px;
+}
+
+
+// Modal Example
+// ---------------
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
+
+.overlay-container{
+  text-align: center; 
+  padding: 20px;
+}
+.overlay  .alert{
+  margin-bottom: 0;
+}
+
+.example-container{
+  padding: 60px;
+  text-align: center;
+}

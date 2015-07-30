@@ -8,25 +8,27 @@ import Overlay from './Overlay';
 import Tooltip from './Tooltip';
 import Modal from './Modal';
 import Mask from './Mask';
+import Tab from './Tab';
 
 import util from './util/util';
 import dom from './util/dom';
 
 export default {
   // Components
-  DropDownButton: DropDownButton,
-  Pagination: Pagination,
-  SelectAble: SelectAble,
-  SelectItem: SelectItem,
-  Pophover: Pophover,
-  Overlay: Overlay,
-  Tooltip: Tooltip,
-  Modal: Modal,
-  Mask: Mask,
+  DropDownButton,
+  Pagination,
+  SelectAble,
+  SelectItem,
+  Pophover,
+  Overlay,
+  Tooltip,
+  Modal,
+  Mask,
+  Tab,
 
   // utility
-  util: util,
-  dom: dom
+  util,
+  dom
 }
 
 

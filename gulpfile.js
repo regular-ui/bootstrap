@@ -1,14 +1,16 @@
-var through = require('through2');
-var shell = require("gulp-shell");
-var shell = require("gulp-jshint");
-var gulp = require('gulp');
-var path = require('path');
+var webpack = require('gulp-webpack');
+var deploy = require("gulp-gh-pages");
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
-var webpack = require('gulp-webpack');
-
-
 var pkg = require("./package.json");
+var shell = require("gulp-jshint");
+var doc = require('./scripts/doc-task.js');
+var through = require('through2');
+var shell = require("gulp-shell");
+var gulp = require('gulp');
+var path = require('path');
+
+
 
 var wpConfig = {
  output: {
@@ -50,27 +52,17 @@ gulp.task('build', [  ], function() {
 });
 
 
-gulp.task('watch', ["build"], function(){
+gulp.task('watch', ["build", "doc"], function(){
   gulp.watch(['src/**/*'], ['build']);
-
+  gulp.watch(['doc/src/**/*.js', 'src/**/*'], ['doc-js']);
+  gulp.watch(['doc/document/*','doc/src/templates/*', 'doc/examples/*.js' ], ['doc-template']);
+  gulp.watch(['doc/src/mcss/*.mcss' ], ['doc-css']);
 })
 
 
 gulp.task('default', [ 'watch']);
 
 
-gulp.task('mocha', function() {
-
-  return gulp.src(['test/spec/test-*.js', 'test/spec/node-*.js' ])
-    .pipe(mocha({reporter: 'spec' }) )
-    .on('error', function(){
-      // gutil.log.apply(this, arguments);
-      console.log('\u0007');
-    })
-    .on('end', function(){
-      global.expect = null;
-    });
-});
 
 
 gulp.task('karma', function (done) {
@@ -96,6 +88,17 @@ gulp.task("test", ["mocha", "karma"])
 gulp.task('travis', ['jshint' ,'build','mocha',  'karma']);
 
 
+
+gulp.task('deploy', ['doc'], function () {
+  gulp.src("doc/public/**/*.*")
+    .pipe(deploy({
+      remoteUrl: "git@github.com:regular-ui/bootstrap",
+      branch: "gh-pages"
+    }))
+    .on("error", function(err){
+      console.log(err)
+    })
+});
 
 
 function wrap(fn){
