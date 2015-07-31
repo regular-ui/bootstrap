@@ -10,7 +10,7 @@ const tpl = `
   <div class='playground {open && "playground-open"}'>
   <div class="bs-example bs-example-modal" ref=container >
     <pre class='alert alert-danger' r-hide={!error}>{error}</pre>
-    {#inc component}
+    <div class='bs-example-container' r-component={component}></div>
   </div>
 
   <div class="highlight">
@@ -66,11 +66,12 @@ export default Regular.extend({
     try{
       var code = babel.transform(content).code;
       var component = new Function( 'Regular' , code + ';return component;')(Regular)
-      this.data.component = function(){return component}
+      this.data.component = component
       this.data.error = false;
       this.$update();
     }catch(e){
       // dealy Error Message
+      console.log(e)
       this.eid = setTimeout(function(){
         this.data.error = e.message||e;
         this.data.component = '';
@@ -83,6 +84,15 @@ export default Regular.extend({
     return false;
   }
 
+}).directive('r-component', function(elem, val){
+  var pre = null
+  this.$watch(val, function(component){
+    if(component instanceof Regular){
+      if(pre) pre.destroy()
+      component.$inject(elem)
+      pre = component
+    }
+  })
 })
 
 

@@ -89,7 +89,7 @@ gulp.task('travis', ['jshint' ,'build','mocha',  'karma']);
 
 
 
-gulp.task('deploy', ['doc'], function () {
+gulp.task('deploy', function () {
   gulp.src("doc/public/**/*.*")
     .pipe(deploy({
       remoteUrl: "git@github.com:regular-ui/bootstrap",

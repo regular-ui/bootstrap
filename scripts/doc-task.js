@@ -34,7 +34,7 @@ swig.setFilter('demo', function(value){
       content = 'Load ' + name + ' Failed!!'
       console.log(content);
     }
-    return '<textarea class="j-editor">'+ content +'</textarea>'
+    return '<textarea class="j-editor" style="display:none">'+ content +'</textarea>'
   }).replace('<table>', '<table class="table table-bordered table-striped">')
 })
 
@@ -67,7 +67,7 @@ gulp.task('doc-template', function(done){
           sections: sections
         },callback)
       },
-      fs.writeFile.bind(fs, path.join(__dirname, '../doc/public/document.html'))
+      fs.writeFile.bind(fs, path.join(__dirname, '../doc/public/index.html'))
   ],done);
 })
 
