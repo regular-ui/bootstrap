@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!-- saved from url=(0035)http://getbootstrap.com/javascript/ -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Regular · Component · Bootstrap</title>
+  <title>Regular · Bootstrap</title>
 
   <!-- Bootstrap core CSS -->
 
@@ -75,7 +74,7 @@
 <p>Mask Component providing a masking layer for developer.</p>
 <hr>
 <h3 id="simple-mask">Simple Mask</h3>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
 <button class='btn btn-primary' on-click={ show = true}>Open Mask</button>
 <mask show={show}  on-click={show = false}></mask>
@@ -84,7 +83,7 @@
 </textarea></p>
 <h3 id="contained-mask">Contained Mask</h3>
 <p>you can use <code>container</code> to specified custom container, default is <code>document.body</code>.</p>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
 <div ref='container' 
       class='modal-container' 
@@ -101,7 +100,7 @@
 </textarea></p>
 <h3 id="transclude-content-in-mask">transclude content in  Mask</h3>
 <p>you combine mask with other content, the following example use svg as its content.</p>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
     <button class='btn btn-primary' on-click={ show = true}>Open Mask with Loding Animation</button>
     <mask show={show} auto-close >
@@ -125,7 +124,7 @@
       marginLeft: '-64px', 
       marginTop: '-64px'
     },
-    fill: 'black'
+    fill: 'green'
   }
 })
 </textarea></p>
@@ -230,7 +229,7 @@ you may want to know <strong class="text-info"><a href="guide">two way to use re
 <p>Overlay is used for position element to close specified target</p>
 <hr>
 <h3 id="simple-overlay">simple overlay</h3>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
 
   <div class='overlay-container'>
@@ -255,7 +254,7 @@ you may want to know <strong class="text-info"><a href="guide">two way to use re
 <li><p>pass <code>gap</code> to control the gap from overlay to target.</p>
 </li>
 </ol>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
   <div class='overlay-container'>
   <button ref='ipt' on-click={showOverlay = !showOverlay } class='btn btn-default'>
@@ -289,7 +288,7 @@ you may want to know <strong class="text-info"><a href="guide">two way to use re
 </textarea></p>
 <h3 id="autoclose-overlay">autoClose overlay</h3>
 <p>if pass <code>autoClose</code>, whenever you click area out of the overlay, it will be closed.</p>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
 
   <div class='overlay-container'>
@@ -320,7 +319,7 @@ See <a href="#tooltip">Tootip</a> and <a href='#pophover'>Pophover</a> for detai
         
         <div class="bs-docs-section" id='app'><p><a name="pophover"></a></p>
 <h1 id="pophover">Pophover</h1>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
   <div class='example-container'>
     <pophover title='pophover title'>
@@ -337,7 +336,7 @@ See <a href="#tooltip">Tootip</a> and <a href='#pophover'>Pophover</a> for detai
 </div>
         
         <div class="bs-docs-section" id='app'><h2 id="tab">Tab</h2>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
   <tab>
     <tab.pane title='tab1'>
@@ -364,7 +363,7 @@ See <a href="#tooltip">Tootip</a> and <a href='#pophover'>Pophover</a> for detai
         <div class="bs-docs-section" id='app'><h1 id="dropdownbutton">DropdownButton</h1>
 <p><span class='glyphicon glyphicon-new-window'></span> source: <a href="https://github.com/regular-ui/bootstrap/tree/master/src/DropDownButton.js">https://github.com/regular-ui/bootstrap/tree/master/src/DropDownButton.js</a></p>
 <hr>
-<p><textarea class="j-editor">const component = new Regular({
+<p><textarea class="j-editor" style="display:none">const component = new Regular({
   template: ` 
 
   <div class='overlay-container'>

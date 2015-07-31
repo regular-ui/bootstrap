@@ -97,7 +97,7 @@
 
 	var _ = _regularjs2['default'].util;
 
-	var tpl = '\n  <div class=\'playground {open && "playground-open"}\'>\n  <div class="bs-example bs-example-modal" ref=container >\n    <pre class=\'alert alert-danger\' r-hide={!error}>{error}</pre>\n    {#inc component}\n  </div>\n\n  <div class="highlight">\n    <textarea value={source} ref=\'area\' style=\'display:none\'></textarea>\n  </div>\n  <a class="toggle " title=\'Edit Source\' on-click={this.toggle()}>\n  <span class="glyphicon glyphicon-chevron-{open? \'up\': \'down\'}"></span>\n    Source Code\n  </a>\n  </div>\n';
+	var tpl = '\n  <div class=\'playground {open && "playground-open"}\'>\n  <div class="bs-example bs-example-modal" ref=container >\n    <pre class=\'alert alert-danger\' r-hide={!error}>{error}</pre>\n    <div class=\'bs-example-container\' r-component={component}></div>\n  </div>\n\n  <div class="highlight">\n    <textarea value={source} ref=\'area\' style=\'display:none\'></textarea>\n  </div>\n  <a class="toggle " title=\'Edit Source\' on-click={this.toggle()}>\n  <span class="glyphicon glyphicon-chevron-{open? \'up\': \'down\'}"></span>\n    Source Code\n  </a>\n  </div>\n';
 
 	exports['default'] = _regularjs2['default'].extend({
 	  name: 'hello',
@@ -142,13 +142,12 @@
 	    try {
 	      var code = babel.transform(content).code;
 	      var component = new Function('Regular', code + ';return component;')(_regularjs2['default']);
-	      this.data.component = function () {
-	        return component;
-	      };
+	      this.data.component = component;
 	      this.data.error = false;
 	      this.$update();
 	    } catch (e) {
 	      // dealy Error Message
+	      console.log(e);
 	      this.eid = setTimeout((function () {
 	        this.data.error = e.message || e;
 	        this.data.component = '';
@@ -161,6 +160,15 @@
 	    return false;
 	  }
 
+	}).directive('r-component', function (elem, val) {
+	  var pre = null;
+	  this.$watch(val, function (component) {
+	    if (component instanceof _regularjs2['default']) {
+	      if (pre) pre.destroy();
+	      component.$inject(elem);
+	      pre = component;
+	    }
+	  });
 	});
 	module.exports = exports['default'];
 
